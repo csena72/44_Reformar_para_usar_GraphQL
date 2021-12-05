@@ -1,0 +1,7 @@
+[2021-10-18T22:47:54.697] [ERROR] error - Error en conexión de Base de datos: MongoServerError: bad auth : Authentication failed.
+[2021-11-21T20:07:37.694] [ERROR] error - Invalid Password
+[2021-11-21T20:07:37.694] [ERROR] error - Invalid Password
+[2021-11-22T11:56:48.107] [ERROR] error - Invalid Password
+[2021-11-22T11:56:48.108] [ERROR] error - Invalid Password
+[2021-11-22T12:09:04.038] [ERROR] error - Error en conexión de Base de datos: Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.qsdfx.mongodb.net
+[2021-11-22T12:10:38.187] [ERROR] error - Error en conexión de Base de datos: Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.qsdfx.mongodb.net
