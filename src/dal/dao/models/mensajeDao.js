@@ -4,13 +4,13 @@ const { Schema, model } = require('mongoose');
 const mensajeSchema = new Schema({
     id: String,
     author: {
-      id: String,
-      nombre: String,
-      apellido: String,
-      edad: Number,
+      name: String,
+      last_name: String,
+      age: Number,
       alias: String,
       avatar: String,
     },
+    email: String,
     date: String,
     message: String
 });

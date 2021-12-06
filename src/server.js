@@ -342,7 +342,7 @@ if (SERVER_MODE === "cluster" && cluster.isMaster) {
         productos: productos,
       });
     } else {
-      res.sendFile(process.cwd() + "/");
+      //res.sendFile(process.cwd() + "/");
     }
   });
 
@@ -397,27 +397,28 @@ if (SERVER_MODE === "cluster" && cluster.isMaster) {
     const responseMsg = await axios.get('http://localhost:8080/api/mensajes');
 
     let productos =  responseProducts.data;
-    let mensajes =  responseMsg.data;
+    let mensajes =  responseMsg.data.entities.entries;
 
     socket.emit("mensajes", {
       mensajes: mensajes,
     });
 
     socket.on("nuevo-mensaje", async (nuevoMensaje) => {
-      const { author, message } = nuevoMensaje;
+      const { mensaje } = nuevoMensaje;
       const elNuevoMensaje = {
-        author,
-        message,
+        author: {
+          name: nuevoMensaje.nombre,
+          last_name: nuevoMensaje.apellido,
+          age: nuevoMensaje.edad,
+          alias: nuevoMensaje.alias,
+          avatar: nuevoMensaje.avatar,
+        },
+        email: nuevoMensaje.email,
+        date: nuevoMensaje.hora,
+        message: mensaje,
       };
 
-      await mensajeService.createMensaje(elNuevoMensaje);
-
-      if(data.text.includes('administrador')) {
-        console.log('MENSAJE SMS AL ADMIN')
-        let mensaje = 'El usuario ' + data.author.email + ' te envió el mensaje: ' + data.text
-        let rta = await twilio.enviarSMS(mensaje, '+54911nnnnnnnn')
-        console.log(rta)
-      }
+      await axios.post('http://localhost:8080/api/mensajes', elNuevoMensaje);
 
       io.sockets.emit("recibir nuevoMensaje", [elNuevoMensaje]);
     });
